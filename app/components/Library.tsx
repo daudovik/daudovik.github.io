@@ -1,5 +1,5 @@
 "use client"
-import { useRouter } from 'next/navigation';
+
 import { Input } from "@/components/ui/input";
 import { Search } from 'lucide-react';
 import {Button} from "@/components/ui/button";
@@ -12,15 +12,7 @@ import Cofie5  from '@/public/cofie/5.png';
 import Image from "next/image";
 import {useState} from "react";
 
-const Library = () => {
-	const [price, setPrice] = useState()
-
-	const router = useRouter();
-	const changeRoute = () => {
-		router.push('/sale');
-	}
-
-
+const Library = ({changeValue} : any) => {
 	return(
 		<>
 			<div className='flex items-center rounded-md border border-input bg-background overflow-hidden'>
@@ -35,9 +27,9 @@ const Library = () => {
 				/>
 			</div>
 			<div className='mt-2 mb-4'>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1'>
+				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('5.00')}>
 					<div className='flex items-center gap-2'>
-						<div className='w-[48px] '>
+						<div className='w-[48px]'>
 							<Image src={Cofie1} alt='cofie'/>
 						</div>
 						<h2 className='font-medium'>Americano</h2>
@@ -46,7 +38,7 @@ const Library = () => {
 						<p>$5.00</p>
 					</div>
 				</div>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1'>
+				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('7.00')}>
 					<div className='flex items-center gap-2'>
 						<div className='w-[48px] '>
 							<Image src={Cofie2} alt='cofie'/>
@@ -57,7 +49,7 @@ const Library = () => {
 						<p>$7.00</p>
 					</div>
 				</div>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1'>
+				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('7.00')}>
 					<div className='flex items-center gap-2'>
 						<div className='w-[48px] '>
 							<Image src={Cofie3} alt='cofie'/>
@@ -68,7 +60,7 @@ const Library = () => {
 						<p>$7.00</p>
 					</div>
 				</div>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1'>
+				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('7.00')}>
 					<div className='flex items-center gap-2'>
 						<div className='w-[48px] '>
 							<Image src={Cofie4} alt='cofie'/>
@@ -79,7 +71,7 @@ const Library = () => {
 						<p>$7.00</p>
 					</div>
 				</div>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1'>
+				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('4.00')}>
 					<div className='flex items-center gap-2'>
 						<div className='w-[48px] '>
 							<Image src={Cofie5} alt='cofie'/>
@@ -93,9 +85,6 @@ const Library = () => {
 			</div>
 			<div className='flex justify-center'>
 				<Button variant='secondary'>Add new item</Button>
-			</div>
-			<div className='mt-4'>
-				<Button className='w-full' onClick={changeRoute}>Charge $0.00</Button>
 			</div>
 		</>
 	)

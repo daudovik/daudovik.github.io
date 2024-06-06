@@ -12,13 +12,15 @@ const Invoice = () => {
 		router.push('/scan');
 	}
 	return(
-		<section className='flex flex-col'>
+		<section className='flex flex-col h-full'>
 			<header className='relative text-center mb-4'>
 				<Link href='/payment' className='absolute left-0 p-0 m-0 h-auto'> <ArrowLeft/></Link>
 				<p>Invoice information</p>
 			</header>
-			<div className='grow'>
-				<p className='text-center py-5 text-2xl font-bold'>$10.00</p>
+			<div className="main">
+				<div className='flex justify-center items-center h-full'>
+					<p className='text-center py-5 text-2xl font-bold'>$10.00</p>
+				</div>
 			</div>
 			<div className='mb-2'>
 				<p>How would you like to share the invoice?</p>

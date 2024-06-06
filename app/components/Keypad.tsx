@@ -1,29 +1,25 @@
 "use client"
 import {useState} from "react";
-import { useRouter } from 'next/navigation';
+
 
 import {Button} from "@/components/ui/button";
 
-const Keypad = () => {
+const Keypad = ({ onValueChange }: any) => {
 	const [value, setValue] = useState('0.00');
-	const router = useRouter();
+
 	const handleButtonClick = (char:any) => {
 		if (char === '.' && value.includes('.')) return;
 		if (value === '0.00') setValue(char === '.' ? '0.' : char);
 		else setValue(value + char);
+		onValueChange(char === '.' ? (value === '0.00' ? '0.' : value + char) : value + char);
 	};
 
 	const handleDelete = () => {
-		if (value.length > 1) {
-			setValue(value.slice(0, -1));
-		} else {
-			setValue('0.00');
-		}
+		const newValue = value.length > 1 ? value.slice(0, -1) : '0.00';
+		setValue(newValue);
+		onValueChange(newValue);
 	};
 
-	const changeRoute = () => {
-		router.push('/sale');
-	}
 
 	return(
 		<div>
@@ -42,9 +38,6 @@ const Keypad = () => {
 				<Button variant="ghost" onClick={() => handleButtonClick('.')}>.</Button>
 				<Button variant="ghost" onClick={() => handleButtonClick('0')}>0</Button>
 				<Button variant="ghost" onClick={handleDelete}>DEL</Button>
-			</div>
-			<div className='mt-4'>
-				<Button className='w-full' onClick={changeRoute}>Charge $0.00</Button>
 			</div>
 		</div>
 	)

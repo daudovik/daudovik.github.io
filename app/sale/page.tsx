@@ -13,7 +13,7 @@ const Sale = () => {
 	}
 
 	return(
-		<section className='min-h-screen flex flex-col'>
+		<section className='h-full flex flex-col'>
 			<div className='main'>
 				<header className='relative text-center mb-4'>
 					<Link href='/' className='absolute left-0 p-0 m-0 h-auto'> <ArrowLeft/></Link>

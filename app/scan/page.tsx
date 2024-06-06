@@ -21,15 +21,17 @@ const Scan = () => {
 	}, [])
 
 	return(
-		<section className='flex flex-col'>
+		<section className='flex flex-col h-full'>
 			<header className='relative text-center mb-4'>
 				<Link href='/invoice' className='absolute left-0 p-0 m-0 h-auto'> <ArrowLeft/></Link>
 				<p>Waiting payment</p>
 			</header>
-			<div className='text-center grow py-16'>
-				<h1 className='text-5xl font-bold'>$10.00</h1>
+			<div className='main'>
+				<div className='text-center h-full py-6'>
+					<h1 className='text-5xl font-bold'>$10.00</h1>
+				</div>
 			</div>
-			<div className='text-center'>
+			<div className='text-center mb-2'>
 				<p className='text-brand'>Scan the code in your Telegram Wallet</p>
 			</div>
 			<div className='bg-slate-50	 rounded-3xl py-3 flex items-center justify-center'>
