@@ -4,8 +4,11 @@ import Link from "next/link";
 import {ArrowLeft} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
+import {useSelector} from "react-redux";
 
 const Invoice = () => {
+	// @ts-ignore
+	const {price} = useSelector((state) => state.price)
 	const router = useRouter();
 
 	const changeRoute = () => {
@@ -19,7 +22,7 @@ const Invoice = () => {
 			</header>
 			<div className="main">
 				<div className='flex justify-center items-center h-full'>
-					<p className='text-center py-5 text-2xl font-bold'>$10.00</p>
+					<p className='text-center py-5 text-2xl font-bold'>${price}</p>
 				</div>
 			</div>
 			<div className='mb-2'>

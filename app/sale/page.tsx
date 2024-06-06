@@ -5,8 +5,12 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import {Button} from "@/components/ui/button";
+import {useSelector} from "react-redux";
 
 const Sale = () => {
+	// @ts-ignore
+	const {price} = useSelector((state) => state.price)
+
 	const router = useRouter();
 	const changeRoute = () => {
 		router.push('/payment');
@@ -34,7 +38,7 @@ const Sale = () => {
 				</div>
 			</div>
 			<div className='mt-4'>
-				<Button className='w-full' onClick={changeRoute}>Charge $0.00</Button>
+				<Button className='w-full' onClick={changeRoute}>Charge ${price}</Button>
 			</div>
 		</section>
 	)

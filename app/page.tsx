@@ -5,20 +5,22 @@ import Library from "@/app/components/Library";
 import Keypad from "@/app/components/Keypad";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
-import {useState} from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import {setPrice} from '@/store/features/priceSlice'
 
 export default function Home() {
 
-  const [value, setValue] = useState('0.00')
+  // @ts-ignore
+  const {price} = useSelector((state) => state.price)
 
+  const dispatch = useDispatch();
   const router = useRouter();
   const changeRoute = () => {
     router.push('/sale');
   }
 
   const changeValue = (v:any) => {
-    setValue(v)
+    dispatch(setPrice(v))
   }
 
   return (
@@ -34,13 +36,13 @@ export default function Home() {
             <Library changeValue={changeValue}/>
           </TabsContent>
           <TabsContent value="Keypad">
-            <Keypad onValueChange={changeValue}/>
+            <Keypad onValueChange={changeValue} price={price}/>
           </TabsContent>
           <TabsContent value="Favorites">Favorites</TabsContent>
         </Tabs>
       </div>
       <div className='mt-4'>
-        <Button className='w-full' onClick={changeRoute}>Charge $<span>{value}</span></Button>
+        <Button className='w-full' onClick={changeRoute}>Charge $<span>{price}</span></Button>
       </div>
     </section>
   );

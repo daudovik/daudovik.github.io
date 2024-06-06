@@ -6,9 +6,12 @@ import Image from "next/image";
 import QR from '@/public/qr-code.png'
 import {useRouter} from "next/navigation";
 import {useEffect} from "react";
+import {useSelector} from "react-redux";
+
 
 const Scan = () => {
-
+// @ts-ignore
+	const {price} = useSelector((state) => state.price)
 	const router = useRouter();
 	const changeRoute = () => {
 		router.push('/success');
@@ -18,7 +21,7 @@ const Scan = () => {
 		setTimeout(() => {
 			changeRoute()
 		}, 5000)
-	}, [])
+	}, [router])
 
 	return(
 		<section className='flex flex-col h-full'>
@@ -28,7 +31,7 @@ const Scan = () => {
 			</header>
 			<div className='main'>
 				<div className='text-center h-full py-6'>
-					<h1 className='text-5xl font-bold'>$10.00</h1>
+					<h1 className='text-5xl font-bold'>${price}</h1>
 				</div>
 			</div>
 			<div className='text-center mb-2'>

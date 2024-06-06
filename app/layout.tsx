@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import {Providers} from "@/store/provider";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className='flex justify-center items-start'>
-          <div className='max-w-custom w-full h-full px-4 py-6 h-[100vh]'>
-            {children}
+          <div className='max-w-custom w-full px-4 py-6 h-[100vh]'>
+            <Providers>
+              {children}
+            </Providers>
           </div>
         </div>
       </body>

@@ -6,8 +6,11 @@ import {Button} from "@/components/ui/button";
 import {ArrowLeft} from "lucide-react";
 import { ChevronRight } from 'lucide-react';
 import {useRouter} from "next/navigation";
+import {useSelector} from "react-redux";
 
 const Payment = () => {
+	// @ts-ignore
+	const {price} = useSelector((state) => state.price)
 	const router = useRouter();
 
 	const changeRoute = () => {
@@ -21,7 +24,7 @@ const Payment = () => {
 				<p>Payment method</p>
 			</header>
 			<div>
-				<h1 className='text-6xl	font-bold pb-6 pt-5'>$10.00</h1>
+				<h1 className='text-6xl	font-bold pb-6 pt-5'>$ {price}</h1>
 			</div>
 			<div className=''>
 				<Button

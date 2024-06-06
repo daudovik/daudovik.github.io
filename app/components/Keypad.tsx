@@ -4,8 +4,8 @@ import {useState} from "react";
 
 import {Button} from "@/components/ui/button";
 
-const Keypad = ({ onValueChange }: any) => {
-	const [value, setValue] = useState('0.00');
+const Keypad = ({ onValueChange, price }: any) => {
+	const [value, setValue] = useState(price);
 
 	const handleButtonClick = (char:any) => {
 		if (char === '.' && value.includes('.')) return;
