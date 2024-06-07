@@ -29,8 +29,8 @@ const Scan = () => {
 				<Link href='/invoice' className='absolute left-0 p-0 m-0 h-auto'> <ArrowLeft/></Link>
 				<p>Waiting payment</p>
 			</header>
-			<div className='main'>
-				<div className='text-center h-full py-6'>
+			<div className='main flex items-center justify-center'>
+				<div className='text-center py-6'>
 					<h1 className='text-5xl font-bold'>${price}</h1>
 				</div>
 			</div>
