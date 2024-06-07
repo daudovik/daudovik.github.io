@@ -6,7 +6,7 @@ import Keypad from "@/app/components/Keypad";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import {setPrice} from '@/store/features/priceSlice'
+import {setPrice, setLabel} from '@/store/features/priceSlice'
 
 export default function Home() {
 
@@ -19,8 +19,13 @@ export default function Home() {
     router.push('/sale');
   }
 
-  const changeValue = (v:any) => {
-    dispatch(setPrice(v))
+  const changeValue = (price:string, label:string) => {
+    dispatch(setPrice(price))
+    if (label){
+      dispatch(setLabel(label))
+    } else {
+      dispatch(setLabel('Item'))
+    }
   }
 
   return (

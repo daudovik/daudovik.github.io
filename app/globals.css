@@ -79,3 +79,18 @@
   flex: 1 1 auto;
   width: 100%;
 }
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3);
+  transform: scale(0);
+  animation: ripple-animation 600ms linear;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}

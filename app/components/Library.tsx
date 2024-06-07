@@ -10,16 +10,56 @@ import Cofie3  from '@/public/cofie/3.png';
 import Cofie4  from '@/public/cofie/4.png';
 import Cofie5  from '@/public/cofie/5.png';
 import Image from "next/image";
+
+import Ripple from "@/components/Riple";
 import {useState} from "react";
 
+// @ts-ignore
+const RippleElement = ({ children, onClick }) => {
+	const [ripples, setRipples] = useState([]);
+
+	const createRipple = (event:any) => {
+		const { clientX, clientY, currentTarget } = event;
+		const rect = currentTarget.getBoundingClientRect();
+		const x = clientX - rect.left;
+		const y = clientY - rect.top;
+
+		const newRipple = { x, y, key: Date.now() };
+		// @ts-ignore
+		setRipples((prevState) => [...prevState, newRipple]);
+
+
+		setTimeout(() => {
+			// @ts-ignore
+			setRipples((prevState) => prevState.filter(ripple => ripple.key !== newRipple.key));
+		}, 600);
+	};
+
+	return (
+		<div
+			className='relative overflow-hidden border px-4 py-2 flex justify-between items-center mb-1'
+			onClick={(e) => {
+				createRipple(e);
+				onClick(e);
+			}}>
+			{ripples.map(({ x, y, key }) => (
+				<Ripple key={key} x={x} y={y} />
+			))}
+			{children}
+		</div>
+	);
+};
+
 const Library = ({changeValue} : any) => {
+
+
 	return(
 		<>
 			<div className='flex items-center rounded-md border border-input bg-background overflow-hidden'>
 				<Button
 					className='hover:bg-inherit hover:text-accent-foreground focus-visible:ring-0 focus-visible:none focus-visible:ring-offset-0'
 					variant='ghost'>
-					<Search />
+					<Search/>
 				</Button>
 				<Input
 					placeholder='Type a command or search...'
@@ -27,61 +67,25 @@ const Library = ({changeValue} : any) => {
 				/>
 			</div>
 			<div className='mt-2 mb-4'>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('5.00')}>
-					<div className='flex items-center gap-2'>
-						<div className='w-[48px]'>
-							<Image src={Cofie1} alt='cofie'/>
+				{[
+					{price: '5.00', label: 'Americano', imgSrc: Cofie1},
+					{price: '7.00', label: 'Latte', imgSrc: Cofie2},
+					{price: '7.00', label: 'Flat White', imgSrc: Cofie3},
+					{price: '7.00', label: 'Capuchino', imgSrc: Cofie4},
+					{price: '4.00', label: 'Espresso', imgSrc: Cofie5},
+				].map(({price, label, imgSrc}, index) => (
+					<RippleElement key={index} onClick={() => changeValue(price, label)}>
+						<div className='flex items-center gap-2'>
+							<div className='w-[48px]'>
+								<Image src={imgSrc} alt={label}/>
+							</div>
+							<h2 className='font-medium'>{label}</h2>
 						</div>
-						<h2 className='font-medium'>Americano</h2>
-					</div>
-					<div>
-						<p>$5.00</p>
-					</div>
-				</div>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('7.00')}>
-					<div className='flex items-center gap-2'>
-						<div className='w-[48px] '>
-							<Image src={Cofie2} alt='cofie'/>
+						<div>
+							<p>${price}</p>
 						</div>
-						<h2 className='font-medium'>Latte</h2>
-					</div>
-					<div>
-						<p>$7.00</p>
-					</div>
-				</div>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('7.00')}>
-					<div className='flex items-center gap-2'>
-						<div className='w-[48px] '>
-							<Image src={Cofie3} alt='cofie'/>
-						</div>
-						<h2 className='font-medium'>Flat White</h2>
-					</div>
-					<div>
-						<p>$7.00</p>
-					</div>
-				</div>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('7.00')}>
-					<div className='flex items-center gap-2'>
-						<div className='w-[48px] '>
-							<Image src={Cofie4} alt='cofie'/>
-						</div>
-						<h2 className='font-medium'>Capuchino</h2>
-					</div>
-					<div>
-						<p>$7.00</p>
-					</div>
-				</div>
-				<div className='border px-4 py-2 flex justify-between items-center mb-1' onClick={() => changeValue('4.00')}>
-					<div className='flex items-center gap-2'>
-						<div className='w-[48px] '>
-							<Image src={Cofie5} alt='cofie'/>
-						</div>
-						<h2 className='font-medium'>Espresso</h2>
-					</div>
-					<div>
-						<p>$4.00</p>
-					</div>
-				</div>
+					</RippleElement>
+				))}
 			</div>
 			<div className='flex justify-center'>
 				<Button variant='secondary'>Add new item</Button>

@@ -9,7 +9,7 @@ import {useSelector} from "react-redux";
 
 const Sale = () => {
 	// @ts-ignore
-	const {price} = useSelector((state) => state.price)
+	const {price, label} = useSelector((state) => state.price)
 
 	const router = useRouter();
 	const changeRoute = () => {
@@ -25,12 +25,8 @@ const Sale = () => {
 				</header>
 				<div className='mb-4'>
 					<div className='flex justify-between border-b pt-5 pb-5'>
-						<div className='font-medium'>Empty</div>
-						<div>$20.00</div>
-					</div>
-					<div className='flex justify-between border-b pt-5 pb-5'>
-						<div className='font-medium'>Empty</div>
-						<div>$20.00</div>
+						<div className='font-medium'>{label}</div>
+						<div>${price}</div>
 					</div>
 				</div>
 				<div className='flex justify-end'>
